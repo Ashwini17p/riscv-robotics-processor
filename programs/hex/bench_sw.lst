@@ -1,0 +1,73 @@
+
+/mnt/c/Users/HP/Downloads/riscv-robotics-processor/build/programs/bench_sw.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:	40000437          	lui	s0,0x40000
+   4:	00300293          	addi	t0,zero,3
+   8:	00542c23          	sw	t0,24(s0) # 40000018 <MMIO_BASE+0x18>
+   c:	10000b93          	addi	s7,zero,256
+
+00000010 <ctl_start>:
+  10:	01c42503          	lw	a0,28(s0)
+  14:	02057293          	andi	t0,a0,32
+  18:	06029863          	bne	t0,zero,88 <st_stop>
+  1c:	01f57513          	andi	a0,a0,31
+  20:	06050463          	beq	a0,zero,88 <st_stop>
+  24:	01f00293          	addi	t0,zero,31
+  28:	02550263          	beq	a0,t0,4c <st_center>
+  2c:	01057293          	andi	t0,a0,16
+  30:	02029463          	bne	t0,zero,58 <st_far_left>
+  34:	00157293          	andi	t0,a0,1
+  38:	02029663          	bne	t0,zero,64 <st_far_right>
+  3c:	00857293          	andi	t0,a0,8
+  40:	02029863          	bne	t0,zero,70 <st_left>
+  44:	00257293          	andi	t0,a0,2
+  48:	02029a63          	bne	t0,zero,7c <st_right>
+
+0000004c <st_center>:
+  4c:	04600a13          	addi	s4,zero,70
+  50:	04600a93          	addi	s5,zero,70
+  54:	03c0006f          	jal	zero,90 <ctl_end>
+
+00000058 <st_far_left>:
+  58:	01e00a13          	addi	s4,zero,30
+  5c:	05000a93          	addi	s5,zero,80
+  60:	0300006f          	jal	zero,90 <ctl_end>
+
+00000064 <st_far_right>:
+  64:	05000a13          	addi	s4,zero,80
+  68:	01e00a93          	addi	s5,zero,30
+  6c:	0240006f          	jal	zero,90 <ctl_end>
+
+00000070 <st_left>:
+  70:	03200a13          	addi	s4,zero,50
+  74:	04b00a93          	addi	s5,zero,75
+  78:	0180006f          	jal	zero,90 <ctl_end>
+
+0000007c <st_right>:
+  7c:	04b00a13          	addi	s4,zero,75
+  80:	03200a93          	addi	s5,zero,50
+  84:	00c0006f          	jal	zero,90 <ctl_end>
+
+00000088 <st_stop>:
+  88:	00000a13          	addi	s4,zero,0
+  8c:	00000a93          	addi	s5,zero,0
+
+00000090 <ctl_end>:
+  90:	00000c13          	addi	s8,zero,0
+
+00000094 <pwm_step>:
+  94:	014c3333          	sltu	t1,s8,s4
+  98:	015c33b3          	sltu	t2,s8,s5
+  9c:	00139393          	slli	t2,t2,0x1
+  a0:	00736333          	or	t1,t1,t2
+  a4:	00642a23          	sw	t1,20(s0)
+  a8:	008c0c13          	addi	s8,s8,8
+  ac:	00000013          	addi	zero,zero,0
+  b0:	ff7c62e3          	bltu	s8,s7,94 <pwm_step>
+
+000000b4 <pwm_end>:
+  b4:	f5dff06f          	jal	zero,10 <ctl_start>

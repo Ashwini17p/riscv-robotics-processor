@@ -1,0 +1,6 @@
+# Keep line endings consistent across Windows/Linux checkouts.
+* text=auto eol=lf
+*.hex  text eol=lf
+*.png  binary
+*.xci  text eol=lf
+*.bit  binary

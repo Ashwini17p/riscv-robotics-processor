@@ -158,4 +158,3 @@ module register_file_tb;
     end
 
 endmodule
-```

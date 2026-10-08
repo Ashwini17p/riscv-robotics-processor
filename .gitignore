@@ -1,0 +1,43 @@
+# ---- Vivado generated output (recreate with fpga/basys3/create_project.tcl) ----
+build/
+**/*.cache/
+**/*.gen/
+**/*.hw/
+**/*.ip_user_files/
+**/*.runs/
+**/*.sim/
+**/*.jou
+**/*.log
+**/*.str
+**/*.backup.*
+**/.Xil/
+**/dfx_runtime.txt
+**/*.dcp
+**/*.bit
+**/*.bin
+**/*.ltx
+*.xpr
+*.xpe
+
+# ---- Quartus / ModelSim generated output ----
+db/
+incremental_db/
+output_files/
+simulation/modelsim/
+work/
+rtl_work/
+verilog_libs/
+modelsim.ini
+transcript
+vsim.wlf
+*.wlf
+*.vcd
+*.fst
+*.vvp
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/

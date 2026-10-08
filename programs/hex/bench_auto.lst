@@ -1,0 +1,14 @@
+
+/mnt/c/Users/HP/Downloads/riscv-robotics-processor/build/programs/bench_auto.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:	40000437          	lui	s0,0x40000
+   4:	00100293          	addi	t0,zero,1
+   8:	00542623          	sw	t0,12(s0) # 4000000c <MMIO_BASE+0xc>
+   c:	02542023          	sw	t0,32(s0)
+
+00000010 <idle>:
+  10:	0000006f          	jal	zero,10 <idle>

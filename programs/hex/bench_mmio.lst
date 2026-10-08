@@ -1,0 +1,60 @@
+
+/mnt/c/Users/HP/Downloads/riscv-robotics-processor/build/programs/bench_mmio.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:	40000437          	lui	s0,0x40000
+   4:	00100293          	addi	t0,zero,1
+   8:	00542623          	sw	t0,12(s0) # 4000000c <MMIO_BASE+0xc>
+
+0000000c <ctl_start>:
+   c:	00042503          	lw	a0,0(s0)
+  10:	06050463          	beq	a0,zero,78 <st_stop>
+  14:	01f00293          	addi	t0,zero,31
+  18:	02550263          	beq	a0,t0,3c <st_center>
+  1c:	01057293          	andi	t0,a0,16
+  20:	02029463          	bne	t0,zero,48 <st_far_left>
+  24:	00157293          	andi	t0,a0,1
+  28:	02029663          	bne	t0,zero,54 <st_far_right>
+  2c:	00857293          	andi	t0,a0,8
+  30:	02029863          	bne	t0,zero,60 <st_left>
+  34:	00257293          	andi	t0,a0,2
+  38:	02029a63          	bne	t0,zero,6c <st_right>
+
+0000003c <st_center>:
+  3c:	04600a13          	addi	s4,zero,70
+  40:	04600a93          	addi	s5,zero,70
+  44:	03c0006f          	jal	zero,80 <st_done>
+
+00000048 <st_far_left>:
+  48:	01e00a13          	addi	s4,zero,30
+  4c:	05000a93          	addi	s5,zero,80
+  50:	0300006f          	jal	zero,80 <st_done>
+
+00000054 <st_far_right>:
+  54:	05000a13          	addi	s4,zero,80
+  58:	01e00a93          	addi	s5,zero,30
+  5c:	0240006f          	jal	zero,80 <st_done>
+
+00000060 <st_left>:
+  60:	03200a13          	addi	s4,zero,50
+  64:	04b00a93          	addi	s5,zero,75
+  68:	0180006f          	jal	zero,80 <st_done>
+
+0000006c <st_right>:
+  6c:	04b00a13          	addi	s4,zero,75
+  70:	03200a93          	addi	s5,zero,50
+  74:	00c0006f          	jal	zero,80 <st_done>
+
+00000078 <st_stop>:
+  78:	00000a13          	addi	s4,zero,0
+  7c:	00000a93          	addi	s5,zero,0
+
+00000080 <st_done>:
+  80:	01442223          	sw	s4,4(s0)
+  84:	01542423          	sw	s5,8(s0)
+
+00000088 <ctl_end>:
+  88:	f85ff06f          	jal	zero,c <ctl_start>
